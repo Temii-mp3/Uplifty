@@ -11,31 +11,28 @@ import android.widget.TextView;
 public class welcomePage extends AppCompatActivity {
     private TextView greetingText;
     private Button continueToDashboard;
-    String name = getIntent().getStringExtra("Name");
+    private String name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_page);
 
+        name = getIntent().getStringExtra("Name"); //recovering User Name
         continueToDashboard = findViewById(R.id.goToDashBoard);
         greetingText = findViewById(R.id.text_greet);
         String greeting = "Hello, " + name + "!";
-        greetingText.setText(greeting);
+        greetingText.setText(greeting); //Set greeting
 
-
-        continueToDashboard.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openDashboard();
-            }
+        /**
+         * Lambda expression to open the dashboard page
+         * @param v the button that is clicked, which is "Continue"
+         */
+        continueToDashboard.setOnClickListener(v ->{
+            Intent dashboard = new Intent(this, dashboard.class);
+            dashboard.putExtra("Name", name);
+            startActivity(dashboard);
         });
-    }
 
-
-    private void openDashboard(){
-        Intent dashboard = new Intent(this, dashboard.class);
-        dashboard.putExtra("Name", name);
-        startActivity(dashboard);
     }
 
 

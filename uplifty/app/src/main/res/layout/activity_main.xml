@@ -13,11 +13,11 @@
         android:layout_above="@id/continueBtn"
         android:layout_centerInParent="true"
         android:layout_marginBottom="100dp"
-        android:text="Welcome to Uplifty, What would you like to be called?" />
+        android:text="" />
     <TextView
+        android:id="@+id/displayLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="UPLIFTY"
         android:layout_centerInParent="true"
         android:layout_marginBottom = "100dp"
         android:layout_above="@id/askName"/>
@@ -29,13 +29,13 @@
         android:layout_above="@id/continueBtn"
         android:layout_centerInParent="true"
         android:layout_marginLeft="100dp"
-        android:hint="Name " />
+        android:hint="Name "
+        android:inputType="textPersonName"/>
 
     <Button
         android:id="@+id/continueBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="Continue" />
+        android:layout_centerInParent="true" />
 
 </RelativeLayout>
