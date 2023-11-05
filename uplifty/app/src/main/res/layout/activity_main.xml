@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@drawable/gradient_bckground">
 
     <TextView
         android:id="@+id/askName"
@@ -13,13 +14,17 @@
         android:layout_above="@id/continueBtn"
         android:layout_centerInParent="true"
         android:layout_marginBottom="100dp"
+        android:textSize="15dp"
+        android:textColor="@color/white"
         android:text="" />
     <TextView
         android:id="@+id/displayLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:layout_marginBottom = "100dp"
+        android:layout_marginBottom = "200dp"
+        android:textSize="75dp"
+        android:textColor="@color/white"
         android:layout_above="@id/askName"/>
 
     <EditText
@@ -29,8 +34,9 @@
         android:layout_above="@id/continueBtn"
         android:layout_centerInParent="true"
         android:layout_marginLeft="100dp"
+        android:layout_marginBottom="30dp"
         android:hint="Name "
-        android:inputType="textPersonName"/>
+        android:inputType="textPersonName" />
 
     <Button
         android:id="@+id/continueBtn"
