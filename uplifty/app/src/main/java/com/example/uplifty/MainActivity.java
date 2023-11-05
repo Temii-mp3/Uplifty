@@ -2,6 +2,7 @@ package com.example.uplifty;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
@@ -22,6 +23,9 @@ public class MainActivity extends AppCompatActivity {
         nameSpace = findViewById(R.id.nameSpace);
         askName = findViewById(R.id.askName);
 
+
+
+
         continueBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             /**
@@ -30,10 +34,17 @@ public class MainActivity extends AppCompatActivity {
              * @param the continueBtn button
              */
             public void onClick(View v) {
-                askName.setText("Hello " + nameSpace.getText().toString());
+                openWelcomePage();
             }
         });
 
+    }
+
+    private void openWelcomePage(){
+        String name = nameSpace.getText().toString();
+        Intent welcomePage = new Intent(this, welcomePage.class);
+        welcomePage.putExtra("Name", name);
+        startActivity(welcomePage);
     }
 
 

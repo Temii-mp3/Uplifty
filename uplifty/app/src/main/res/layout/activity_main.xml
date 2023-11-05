@@ -7,13 +7,13 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/askName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome to Uplifty, What would you like to be called?"
+        android:layout_above="@id/continueBtn"
         android:layout_centerInParent="true"
-        android:layout_marginBottom = "100dp"
-        android:id="@+id/askName"
-        android:layout_above="@id/continueBtn"/>
+        android:layout_marginBottom="100dp"
+        android:text="Welcome to Uplifty, What would you like to be called?" />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -25,17 +25,17 @@
     <EditText
         android:id="@+id/nameSpace"
         android:layout_width="match_parent"
-        android:layout_marginLeft="100dp"
         android:layout_height="wrap_content"
         android:layout_above="@id/continueBtn"
         android:layout_centerInParent="true"
+        android:layout_marginLeft="100dp"
         android:hint="Name " />
 
     <Button
+        android:id="@+id/continueBtn"
         android:layout_width="wrap_content"
-        android:layout_centerInParent = "true"
         android:layout_height="wrap_content"
-        android:text="Continue"
-        android:id="@+id/continueBtn"/>
+        android:layout_centerInParent="true"
+        android:text="Continue" />
 
 </RelativeLayout>

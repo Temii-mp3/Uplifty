@@ -13,6 +13,12 @@
         android:theme="@style/Theme.Uplifty"
         tools:targetApi="31">
         <activity
+            android:name=".dashboard"
+            android:exported="false" />
+        <activity
+            android:name=".welcomePage"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
