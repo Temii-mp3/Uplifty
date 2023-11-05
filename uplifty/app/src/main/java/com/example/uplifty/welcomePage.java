@@ -11,14 +11,13 @@ import android.widget.TextView;
 public class welcomePage extends AppCompatActivity {
     private TextView greetingText;
     private Button continueToDashboard;
+    String name = getIntent().getStringExtra("Name");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_page);
 
         continueToDashboard = findViewById(R.id.goToDashBoard);
-
-        String name = getIntent().getStringExtra("Name");
         greetingText = findViewById(R.id.text_greet);
         String greeting = "Hello, " + name + "!";
         greetingText.setText(greeting);
@@ -35,6 +34,7 @@ public class welcomePage extends AppCompatActivity {
 
     private void openDashboard(){
         Intent dashboard = new Intent(this, dashboard.class);
+        dashboard.putExtra("Name", name);
         startActivity(dashboard);
     }
 

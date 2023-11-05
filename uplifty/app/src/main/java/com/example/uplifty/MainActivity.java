@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             /**
              * Anonymous class created for the continueBtn Button
-             * asks the user for thier name and replaces askName variable with greeting using person's name
+             * opens the welcome page
              * @param the continueBtn button
              */
             public void onClick(View v) {
@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //opens the welcomepage
     private void openWelcomePage(){
         String name = nameSpace.getText().toString();
         Intent welcomePage = new Intent(this, welcomePage.class);
