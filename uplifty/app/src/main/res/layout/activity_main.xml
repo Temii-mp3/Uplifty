@@ -14,9 +14,9 @@
         android:layout_above="@id/continueBtn"
         android:layout_centerInParent="true"
         android:layout_marginBottom="100dp"
-        android:textSize="15dp"
+        android:text=""
         android:textColor="@color/white"
-        android:text="" />
+        android:textSize="15dp" />
     <TextView
         android:id="@+id/displayLogo"
         android:layout_width="wrap_content"
@@ -31,10 +31,10 @@
         android:id="@+id/nameSpace"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/continueBtn"
-        android:layout_centerInParent="true"
+        android:layout_above="@+id/continueBtn"
+        android:layout_centerHorizontal="true"
         android:layout_marginLeft="100dp"
-        android:layout_marginBottom="30dp"
+        android:layout_marginBottom="92dp"
         android:hint="Name "
         android:inputType="textPersonName" />
 
@@ -43,5 +43,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true" />
+
 
 </RelativeLayout>
