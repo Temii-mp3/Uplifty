@@ -85,13 +85,13 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/mantras_icon"></ImageView>
+                    android:src="@drawable/helplines_logo"></ImageView>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="MANTRAS"
+                    android:text="HELPLINES"
                     android:textSize="20sp"
                     android:textStyle="bold"></TextView>
 
@@ -121,13 +121,13 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/mantras_icon"></ImageView>
+                    android:src="@drawable/settings_icon"></ImageView>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="MANTRAS"
+                    android:text="SETTINGS"
                     android:textSize="20sp"
                     android:textStyle="bold"></TextView>
             </LinearLayout>
@@ -155,13 +155,13 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/mantras_icon"></ImageView>
+                    android:src="@drawable/dailyfeelings_logo"></ImageView>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="MANTRAS"
+                    android:text="DAILY FEELINGS"
                     android:textSize="20sp"
                     android:textStyle="bold"></TextView>
 
