@@ -37,14 +37,28 @@ public class mantras_page extends AppCompatActivity {
         getMantra4 = findViewById(R.id.mantraview);
 
         ArrayList <ImageButton> buttons = new ArrayList<>();
+        ArrayList <TextView> mantras = new ArrayList<>();
+
+        mantras.add(getMantra1);
+        mantras.add(getMantra2);
+        mantras.add(getMantra3);
+        mantras.add(getMantra4);
+
 
         buttons.add(mantra1);
         buttons.add(mantra2);
         buttons.add(mantra3);
         buttons.add(mantra4);
 
-        for (ImageButton b : buttons){
+
+        for(int i = 0; i < mantras.size(); i++){
+            final int index = i;
+            ImageButton b = buttons.get(index);
             b.setOnClickListener(V->{
+                MyDatabaseHelper myDB = new MyDatabaseHelper(mantras_page.this);
+                myDB.addMantra(mantras.get(index).getText().toString());
+                System.out.println(mantras.get(index).toString());
+
                 if(isDoubleClick){
                     b.setBackgroundColor(Color.GRAY);
                     isDoubleClick = false;
@@ -52,8 +66,6 @@ public class mantras_page extends AppCompatActivity {
                 }else{
                     b.setBackgroundColor(Color.GREEN);
                     isDoubleClick = true;
-
-                    Toast.makeText(this, "Added to your list", Toast.LENGTH_SHORT).show();
                     onclickhandler.postDelayed(()->{
                         if(isDoubleClick){
                             b.setBackgroundColor(Color.GRAY);
@@ -62,6 +74,7 @@ public class mantras_page extends AppCompatActivity {
                     }, 1000000);
                 }
             });
+
         }
 
     }
