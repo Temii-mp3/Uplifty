@@ -30,7 +30,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String query =
                 "CREATE TABLE " + TABLE_NAME +
-                        "  (" + COLUMN_ID + " INTEGER PRIMARY KEY , " +
+                        "  (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                         COLUMN_MANTRAS + " TEXT);";
 
         db.execSQL(query);
@@ -47,7 +47,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        cv.put("COLUMN_MANTRAS", mantra);
+        cv.put(COLUMN_MANTRAS, mantra);
 
        long result = db.insert(TABLE_NAME, null, cv);
 
