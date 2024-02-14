@@ -2,6 +2,7 @@ package com.example.uplifty;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.database.Cursor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,14 +11,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class mantras_page extends AppCompatActivity {
     private ImageButton mantra1, mantra2, mantra3, mantra4;
 
+    private MyDatabaseHelper myDB;
+
     private TextView getMantra1, getMantra2, getMantra3, getMantra4;
     private boolean isDoubleClick = false;
 
-    private ArrayList<String> messages = new ArrayList<>();
+    private ArrayList<String> mantras = new ArrayList<>();
     private Handler onclickhandler = new Handler();
 
     @Override
@@ -77,5 +81,25 @@ public class mantras_page extends AppCompatActivity {
 
         }
 
+
+    }
+
+    private void storeData(MyDatabaseHelper db){
+        Cursor cursor = db.readAllData();
+
+        //check if there are any mantras stored
+        if(cursor.getCount() == 0){
+            Toast.makeText(this, "No Mantra to display", Toast.LENGTH_SHORT).show();
+        }else{
+            while (cursor.moveToNext()){
+                mantras.add(cursor.getString(0));
+            }
+        }
+    }
+    public String getDat(){
+        Random randomGen = new Random();
+        int randManta = randomGen.nextInt(4);
+
+        return mantras.get(randManta);
     }
 }

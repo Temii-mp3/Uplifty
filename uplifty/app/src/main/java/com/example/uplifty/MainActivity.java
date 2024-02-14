@@ -38,4 +38,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
+    public String getNameSpace(){
+        return nameSpace.getText().toString();
+    }
 }

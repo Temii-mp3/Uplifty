@@ -2,6 +2,7 @@ package com.example.uplifty;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
@@ -56,5 +57,19 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
        }else{
            Toast.makeText(context, "Added to your list", Toast.LENGTH_SHORT).show();
        }
+    }
+
+
+    Cursor readAllData(){
+        String query = "SELECT * FROM " + TABLE_NAME;
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = null;
+
+        //check if database is not null
+        if(db != null){
+            db.rawQuery(query, null);
+        }
+        return cursor;
     }
 }
