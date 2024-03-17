@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -28,7 +27,7 @@ public class welcomePage extends AppCompatActivity {
          * @param v the button that is clicked, which is "Continue"
          */
         continueToDashboard.setOnClickListener(v ->{
-            Intent dashboard = new Intent(this, dashboard.class);
+            Intent dashboard = new Intent(this, Dashboard.class);
             dashboard.putExtra("Name", name);
             startActivity(dashboard);
         });
