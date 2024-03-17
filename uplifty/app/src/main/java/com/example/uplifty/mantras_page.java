@@ -59,7 +59,7 @@ public class mantras_page extends AppCompatActivity {
             final int index = i;
             ImageButton b = buttons.get(index);
             b.setOnClickListener(V->{
-                MyDatabaseHelper myDB = new MyDatabaseHelper(mantras_page.this);
+                //yDatabaseHelper myDB = new MyDatabaseHelper(mantras_page.this);
                 myDB.addMantra(mantras.get(index).getText().toString());
                 System.out.println(mantras.get(index).toString());
 

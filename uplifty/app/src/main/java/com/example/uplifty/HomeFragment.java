@@ -1,5 +1,6 @@
 package com.example.uplifty;
 
+import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -14,6 +15,27 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class HomeFragment extends Fragment {
+    private String[] APP_MANTRAS = {
+            "You are calm and centered.",
+            "You trust yourself and your abilities.",
+            "You are worthy of love and respect.",
+            "You let go of what you can't control.",
+            "You are grateful for this moment.",
+            "You embrace change with courage.",
+            "You are resilient and strong.",
+            "You forgive yourself and others.",
+            "You attract positivity into your life.",
+            "You are surrounded by abundance.",
+            "You choose happiness and peace.",
+            "You are capable of achieving your goals.",
+            "You are constantly evolving and growing.",
+            "You release fear and embrace love.",
+            "You are enough just as you are.",
+            "You find joy in the present moment.",
+            "You are guided by your intuition.",
+            "You let go of comparison and embrace uniqueness.",
+            "You are at peace with your past.",
+            "You radiate love and kindness."};
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -53,6 +75,14 @@ public class HomeFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        MyDatabaseHelper_2 myDB = new MyDatabaseHelper_2(HomeFragment.this.getContext());
+
+        myDB.deleteALlData();
+        for(String n: APP_MANTRAS){
+            myDB.addALlMantras(n);
+        }
+
     }
 
     @Override
