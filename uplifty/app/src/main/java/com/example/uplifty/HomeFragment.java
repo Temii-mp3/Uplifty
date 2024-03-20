@@ -1,13 +1,27 @@
 package com.example.uplifty;
 
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.FrameLayout;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -15,6 +29,7 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class HomeFragment extends Fragment {
+    private Handler onClickHandler = new Handler();
     private String[] APP_MANTRAS = {
             "You are calm and centered.",
             "You trust yourself and your abilities.",
@@ -37,6 +52,9 @@ public class HomeFragment extends Fragment {
             "You are at peace with your past.",
             "You radiate love and kindness."};
 
+
+    ArrayList<String> mantras = new ArrayList<String>();
+    //private CustomAdapter customAdapter = new CustomAdapter(mantras);
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -76,19 +94,90 @@ public class HomeFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        MyDatabaseHelper_2 myDB = new MyDatabaseHelper_2(HomeFragment.this.getContext());
-
+        MyDatabaseHelper myDB = new MyDatabaseHelper(HomeFragment.this.getContext());
         myDB.deleteALlData();
+        myDB.resetPrimaryKey();
         for(String n: APP_MANTRAS){
-            myDB.addALlMantras(n);
+            myDB.addAllMantras(n);
         }
-
+        this.getMantras(myDB);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+
+        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        showMantras(APP_MANTRAS, rootView);
+        return rootView;
     }
+
+    void getMantras(MyDatabaseHelper db){
+        Cursor cursor = db.readAllData();
+        if(cursor == null){
+            Toast.makeText(this.getContext(), "NO MANTRAS FOUND", Toast.LENGTH_SHORT).show();
+        }else{
+            while (cursor.moveToNext()){
+                mantras.add(cursor.getString(0));
+            }
+        }
+    }
+
+    /**
+     * This method shows all the mantras dynamically by creating a text view & button for each mantra
+     * performance will definately worsen as more mantras get added, temp fix cuz recycler view not working lel
+     * @param arr the array of mantras
+     * @param rootView root view of the layout(fragment)
+     */
+    void showMantras(String[] arr, View rootView){
+        ScrollView scrv = (ScrollView) rootView.findViewById(R.id.relative_layout_mantras);
+        //linear layout to hold both mantras and button
+        LinearLayout linearLayout = new LinearLayout(this.getContext());
+        linearLayout.setLayoutParams (new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                                                                    LinearLayout.LayoutParams.MATCH_PARENT));
+
+
+        linearLayout.setOrientation(LinearLayout.VERTICAL);
+        scrv.addView(linearLayout);
+        for(String n : arr){
+            //adding new linear layout to button and text side by side
+            LinearLayout itemLayout = new LinearLayout(this.getContext());
+            itemLayout.setLayoutParams (new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT));
+            itemLayout.setOrientation(LinearLayout.HORIZONTAL);
+
+            TextView mantraDisplay = new TextView(this.getContext());
+            ImageButton button = new ImageButton(this.getContext());
+            mantraDisplay.setText(n);
+
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT);
+            layoutParams.weight = 1;
+            mantraDisplay.setLayoutParams(layoutParams);
+            button.setMinimumWidth(80);
+            button.setBackgroundResource(R.drawable.favourite_icon);
+            AtomicBoolean isClicked = new AtomicBoolean(false);
+            button.setOnClickListener(v->{
+                if(isClicked.get()){
+                    button.setBackgroundResource(R.drawable.favourite_icon);
+                }else{
+                    button.setBackgroundResource(R.drawable.favourite_icon_pressed);
+                    isClicked.set(true);
+                    onClickHandler.postDelayed(()->{
+                        if(isClicked.get()){
+                            button.setBackgroundResource(R.drawable.favourite_icon);
+                            isClicked.set(false);
+                        }
+                    }, 1000000);
+                }
+
+            });
+
+
+            itemLayout.addView(mantraDisplay);
+            itemLayout.addView(button);
+
+            linearLayout.addView(itemLayout);
+        }
+    }
+
 }
