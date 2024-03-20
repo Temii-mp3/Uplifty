@@ -52,7 +52,7 @@ public class HomeFragment extends Fragment {
             "You are at peace with your past.",
             "You radiate love and kindness."};
 
-
+   private MyDatabaseHelper myDB;
     ArrayList<String> mantras = new ArrayList<String>();
     //private CustomAdapter customAdapter = new CustomAdapter(mantras);
     // TODO: Rename parameter arguments, choose names that match
@@ -94,13 +94,7 @@ public class HomeFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        MyDatabaseHelper myDB = new MyDatabaseHelper(HomeFragment.this.getContext());
-        myDB.deleteALlData();
-        myDB.resetPrimaryKey();
-        for(String n: APP_MANTRAS){
-            myDB.addAllMantras(n);
-        }
-        this.getMantras(myDB);
+
     }
 
     @Override
@@ -112,16 +106,7 @@ public class HomeFragment extends Fragment {
         return rootView;
     }
 
-    void getMantras(MyDatabaseHelper db){
-        Cursor cursor = db.readAllData();
-        if(cursor == null){
-            Toast.makeText(this.getContext(), "NO MANTRAS FOUND", Toast.LENGTH_SHORT).show();
-        }else{
-            while (cursor.moveToNext()){
-                mantras.add(cursor.getString(0));
-            }
-        }
-    }
+
 
     /**
      * This method shows all the mantras dynamically by creating a text view & button for each mantra
@@ -130,6 +115,8 @@ public class HomeFragment extends Fragment {
      * @param rootView root view of the layout(fragment)
      */
     void showMantras(String[] arr, View rootView){
+         myDB = new MyDatabaseHelper(HomeFragment.this.getContext());
+
         ScrollView scrv = (ScrollView) rootView.findViewById(R.id.relative_layout_mantras);
         //linear layout to hold both mantras and button
         LinearLayout linearLayout = new LinearLayout(this.getContext());
@@ -157,19 +144,14 @@ public class HomeFragment extends Fragment {
             button.setBackgroundResource(R.drawable.favourite_icon);
             AtomicBoolean isClicked = new AtomicBoolean(false);
             button.setOnClickListener(v->{
-                if(isClicked.get()){
-                    button.setBackgroundResource(R.drawable.favourite_icon);
-                }else{
                     button.setBackgroundResource(R.drawable.favourite_icon_pressed);
-                    isClicked.set(true);
-                    onClickHandler.postDelayed(()->{
-                        if(isClicked.get()){
-                            button.setBackgroundResource(R.drawable.favourite_icon);
-                            isClicked.set(false);
-                        }
-                    }, 1000000);
-                }
+                    myDB.addMantra(mantraDisplay.getText().toString());
+            });
 
+            button.setOnLongClickListener(v->{
+                button.setBackgroundResource(R.drawable.favourite_icon);
+                myDB.removeData(mantraDisplay.getText().toString());
+                return true;
             });
 
 

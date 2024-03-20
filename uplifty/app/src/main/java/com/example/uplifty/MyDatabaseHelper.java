@@ -66,7 +66,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 //       }
 //    }
 
-    void addAllMantras(String n){
+    void addMantra(String n){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -79,7 +79,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         }else{
             Toast.makeText(context, "Added to your list", Toast.LENGTH_SHORT).show();
         }
-        db.close();
     }
 
     Cursor readAllData(){
@@ -87,12 +86,29 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         String query = "SELECT * FROM " + TABLE_NAME;
 
         Cursor cursor = null;
-
         //check if database is not null
         if(db != null){
            cursor = db.rawQuery(query, null);
         }
         return cursor;
+    }
+
+    void removeData(String n){
+        SQLiteDatabase db = this.getWritableDatabase();
+        //String query = "DELETE FROM " + TABLE_NAME + " WHERE " + COLUMN_MANTRAS + " LIKE "+ "'%" + n + "%'";
+        String whereClause =  COLUMN_MANTRAS + " LIKE ?";
+        String [] whereArgs = new String[] {"'%" + n + "%'"};
+
+
+
+        if(db != null){
+            long result = db.delete(TABLE_NAME, whereClause, whereArgs);
+            if(result == -1){
+                Toast.makeText(context, "No favourites to remove", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(context, "Removed from favourites", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     void resetPrimaryKey(){
